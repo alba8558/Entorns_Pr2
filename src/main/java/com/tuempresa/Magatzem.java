@@ -18,7 +18,18 @@ class Magatzem {
             return;
         }
 
-        if (!article.nom.equals("Formatge Gidurat") && !article.nom.equals("Entrades per al Concert del Trobador")) {
+        if (article.nom.equals("Formatge Gidurat")) {
+            article.diesPerVendre = article.diesPerVendre - 1;
+            if (article.qualitat < 50) {
+                article.qualitat = article.qualitat + 1;
+            }
+            if (article.diesPerVendre < 0 && article.qualitat < 50) {
+                article.qualitat = article.qualitat + 1;
+            }
+            return;
+        }
+
+        if (!article.nom.equals("Entrades per al Concert del Trobador")) {
             if (article.qualitat > 0) {
                 article.qualitat = article.qualitat - 1;
             }
@@ -44,18 +55,12 @@ class Magatzem {
         article.diesPerVendre = article.diesPerVendre - 1;
 
         if (article.diesPerVendre < 0) {
-            if (!article.nom.equals("Formatge Gidurat")) {
-                if (!article.nom.equals("Entrades per al Concert del Trobador")) {
-                    if (article.qualitat > 0) {
-                        article.qualitat = article.qualitat - 1;
-                    }
-                } else {
-                    article.qualitat = 0;
+            if (!article.nom.equals("Entrades per al Concert del Trobador")) {
+                if (article.qualitat > 0) {
+                    article.qualitat = article.qualitat - 1;
                 }
             } else {
-                if (article.qualitat < 50) {
-                    article.qualitat = article.qualitat + 1;
-                }
+                article.qualitat = 0;
             }
         }
     }
